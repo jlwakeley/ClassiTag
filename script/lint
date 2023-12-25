@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -eou pipefail
+
+. .venv/bin/activate
+
+make check_format
+make check_ruff
+make check_typing

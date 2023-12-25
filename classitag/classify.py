@@ -1,6 +1,7 @@
+import os
+
 import PyPDF2
 from PIL import Image, ImageDraw, ImageFont
-import os
 
 
 def add_overlay(image_path, classification):
@@ -34,9 +35,7 @@ def add_overlay(image_path, classification):
 
 def main():
     file_path = input("Enter the path of the PDF or image file: ").strip()
-    classification = input(
-        "Enter the classification (Classified/Unclassified/Secret): "
-    ).strip()
+    classification = input("Enter the classification (Classified/Unclassified/Secret): ").strip()
 
     if not os.path.isfile(file_path):
         print("Invalid file path. Exiting.")
