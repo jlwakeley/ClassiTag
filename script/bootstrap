@@ -1,0 +1,30 @@
+#!/bin/bash
+
+VENV=".venv"
+
+os_type=$(uname -s)
+
+if [ "$os_type" == "Darwin" ]; then
+    echo "Running on macOS"
+    command -v pyenv || brew install pyenv
+elif [ "$os_type" == "Linux" ]; then
+    echo "Running on Linux (or WSL)"
+    sudo apt-get install libpq-dev build-essential
+    command -v pyenv || curl https://pyenv.run | bash
+else
+    echo "Unsupported operating system: $os_type"
+    exit 1
+fi
+
+pyenv install --skip-existing
+
+test -d $VENV || python -m venv $VENV || return
+
+
+echo "--- poetry setup"
+$VENV/bin/pip install --upgrade pip setuptools
+$VENV/bin/pip install poetry
+
+echo "--- poetry install"
+# https://github.com/python-poetry/poetry/issues/7184
+$VENV/bin/poetry install --no-ansi
