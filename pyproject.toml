@@ -44,6 +44,8 @@ python = "^3.11"
 
 # [tool.poetry.scripts]
 # classitag = "classitag.main:main"
+pypdf2 = "^3.0.1"
+pillow = "^10.1.0"
 
 [tool.poetry.group.dev.dependencies]
 coverage = "*"
