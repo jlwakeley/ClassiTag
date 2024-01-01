@@ -54,4 +54,3 @@ The project relies on the following Python libraries:
 - Supported image formats: PNG, JPG, JPEG.
 
 For more information or assistance, please refer to the documentation or contact the project maintainers.
-```
