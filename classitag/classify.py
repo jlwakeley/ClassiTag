@@ -8,7 +8,7 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
-DEFAULT_FONT_SIZE = 13
+DEFAULT_FONT_SIZE = 14
 CLASSIFICATION_COLORS = {
     "SECRET": (255, 0, 0),
     "CUI": (0, 255, 0),
