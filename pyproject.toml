@@ -37,7 +37,7 @@ disallow_untyped_defs = true
 name = "classitag"
 version = "0.0.1"
 description = "Classification overlay of images and PDFs"
-authors = ["Jon Wakeley", "Matthew Iorio"]
+authors = ["Jon Wakeley" <Jonathan.L.Wakeley@gmail.com>]
 
 [tool.poetry.dependencies]
 python = "^3.11"
