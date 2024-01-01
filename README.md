@@ -50,6 +50,7 @@ The project relies on the following Python libraries:
 
 ## Notes
 
+- The Python version utilized is 3.11.6
 - The classification arguments are not case sensative.
 - Supported image formats: PNG, JPG, JPEG.
 
