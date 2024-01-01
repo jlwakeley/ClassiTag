@@ -15,7 +15,7 @@ CLASSIFICATION_COLORS = {
 }
 DEFAULT_CLASSIFICATION_COLOR = (0, 0, 0)
 BAR_HEIGHT = 15
-FONT = "/home/jwakeley/src/classitag/font/ARIALBD.TTF"
+FONT = "font/ARIALBD.TTF"
 
 
 def load_image(image_path: pathlib.Path) -> Image.Image:
