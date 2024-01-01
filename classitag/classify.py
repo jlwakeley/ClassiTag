@@ -8,13 +8,14 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
-DEFAULT_FONT_SIZE = 14
+DEFAULT_FONT_SIZE = 12
 CLASSIFICATION_COLORS = {
     "SECRET": (255, 0, 0),
     "CUI": (0, 255, 0),
 }
 DEFAULT_CLASSIFICATION_COLOR = (0, 0, 0)
 BAR_HEIGHT = 15
+FONT = "/home/jwakeley/src/classitag/font/ARIALBD.TTF"
 
 
 def load_image(image_path: pathlib.Path) -> Image.Image:
@@ -27,18 +28,22 @@ def load_image(image_path: pathlib.Path) -> Image.Image:
     return None
 
 
-def draw_overlay(draw: ImageDraw.Draw, width: int, classification: str) -> None:
-    font = ImageFont.load_default()
+def draw_overlay(draw: ImageDraw.Draw, width: int, height: int, classification: str) -> None:
+    font = ImageFont.truetype(FONT, DEFAULT_FONT_SIZE)
 
     classification_upper = classification.upper()
 
     overlay_color = CLASSIFICATION_COLORS.get(classification_upper, DEFAULT_CLASSIFICATION_COLOR)
 
+    # Calculate top and bottom overlay heights
+    top_overlay_height = BAR_HEIGHT
+    bottom_overlay_height = BAR_HEIGHT
+
     # Draw top overlay
-    draw.rectangle([0, 0, width, BAR_HEIGHT], fill=overlay_color)
+    draw.rectangle([0, 0, width, top_overlay_height], fill=overlay_color)
 
     # Draw bottom overlay
-    draw.rectangle([0, draw.im.size[1] - BAR_HEIGHT, width, draw.im.size[1]], fill=overlay_color)
+    draw.rectangle([0, height - bottom_overlay_height, width, height], fill=overlay_color)
 
     text = classification_upper if classification_upper in ["SECRET", "CUI"] else classification
 
@@ -47,10 +52,10 @@ def draw_overlay(draw: ImageDraw.Draw, width: int, classification: str) -> None:
     text_width = text_bbox[2] - text_bbox[0]
     text_height = text_bbox[3] + text_bbox[1]
 
-    text_position_top = ((width - text_width) // 2, (BAR_HEIGHT - text_height) // 2)
+    text_position_top = ((width - text_width) // 2, (top_overlay_height - text_height) // 2)
     text_position_bottom = (
         (width - text_width) // 2,
-        draw.im.size[1] - BAR_HEIGHT + (BAR_HEIGHT - text_height) // 2,
+        height - bottom_overlay_height + (bottom_overlay_height - text_height) // 2,
     )
 
     draw.text(text_position_top, text, font=font, fill=(0, 0, 0))
@@ -60,13 +65,19 @@ def draw_overlay(draw: ImageDraw.Draw, width: int, classification: str) -> None:
 def save_image_with_overlay(
     img: Image.Image, image_path: pathlib.Path, classification: str
 ) -> None:
-    width, _ = img.size
+    width, height = img.size
 
-    draw = ImageDraw.Draw(img)
-    draw_overlay(draw, width, classification)
+    # Create a new image with additional space above and below
+    new_img = Image.new("RGB", (width, height + 2 * BAR_HEIGHT), (255, 255, 255))
+
+    # Paste the original image onto the new image
+    new_img.paste(img, (0, BAR_HEIGHT))
+
+    draw = ImageDraw.Draw(new_img)
+    draw_overlay(draw, width, height + 2 * BAR_HEIGHT, classification)
 
     new_file_path = image_path.with_stem(f"({classification.upper()})_{image_path.stem}")
-    img.save(new_file_path.with_suffix(".png"))
+    new_img.save(new_file_path.with_suffix(".png"))
     logging.info(f"Overlay added to {new_file_path.with_suffix('.png')}")
 
 
