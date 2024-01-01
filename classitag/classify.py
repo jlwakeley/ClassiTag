@@ -1,6 +1,7 @@
 import logging
 import pathlib
 
+import click
 from PIL import Image, ImageDraw, ImageFont
 
 logging.basicConfig(
@@ -13,7 +14,6 @@ CLASSIFICATION_COLORS = {
     "CUI": (0, 255, 0),
 }
 DEFAULT_CLASSIFICATION_COLOR = (0, 0, 0)
-FONT_PATH = "/Users/jon/src/classitag/font/OpenSans-Bold.ttf"
 BAR_HEIGHT = 15
 
 
@@ -28,8 +28,7 @@ def load_image(image_path: pathlib.Path) -> Image.Image:
 
 
 def draw_overlay(draw: ImageDraw.Draw, width: int, classification: str) -> None:
-    font_size = DEFAULT_FONT_SIZE
-    font = ImageFont.truetype(FONT_PATH, font_size)
+    font = ImageFont.load_default()
 
     classification_upper = classification.upper()
 
@@ -61,7 +60,7 @@ def draw_overlay(draw: ImageDraw.Draw, width: int, classification: str) -> None:
 def save_image_with_overlay(
     img: Image.Image, image_path: pathlib.Path, classification: str
 ) -> None:
-    width, height = img.size
+    width, _ = img.size
 
     draw = ImageDraw.Draw(img)
     draw_overlay(draw, width, classification)
@@ -91,19 +90,20 @@ def add_overlay_to_directory(directory_path: pathlib.Path, classification: str) 
             logging.warning(f"Skipping unsupported file: {file_path}")
 
 
-def main() -> None:
-    directory_path = pathlib.Path(input("Enter the path to the image directory: ").strip())
-    classification = (
-        input("Enter the classification (Controlled Unclassified Information (CUI)/Secret): ")
-        .strip()
-        .title()
-    )
-
+def create_command_line_interface(directory_path: pathlib.Path, classification: str) -> None:
+    directory_path = pathlib.Path(directory_path)
     if not directory_path.exists() or not directory_path.is_dir():
         logging.error("Invalid directory path. Exiting.")
         return
 
     add_overlay_to_directory(directory_path, classification)
+
+
+@click.command()
+@click.argument("directory_path", type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.argument("classification", type=click.Choice(["CUI", "SECRET"], case_sensitive=False))
+def main(directory_path: pathlib.Path, classification: str) -> None:
+    create_command_line_interface(directory_path, classification)
 
 
 if __name__ == "__main__":
