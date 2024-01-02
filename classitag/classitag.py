@@ -15,10 +15,10 @@ CLASSIFICATION_COLORS = {
 }
 DEFAULT_CLASSIFICATION_COLOR = (0, 0, 0)
 BAR_HEIGHT = 15
-FONT = "font/ARIALBD.TTF"
+FONT = pathlib.Path(__file__).parent / ".." / "font" / "ARIALBD.TTF"
 
 
-def load_image(image_path: pathlib.Path) -> Image.Image:
+def load_image(image_path: pathlib.Path) -> Image.Image | None:
     try:
         return Image.open(image_path)
     except FileNotFoundError:
@@ -28,8 +28,8 @@ def load_image(image_path: pathlib.Path) -> Image.Image:
     return None
 
 
-def draw_overlay(draw: ImageDraw.Draw, width: int, height: int, classification: str) -> None:
-    font = ImageFont.truetype(FONT, DEFAULT_FONT_SIZE)
+def draw_overlay(draw: ImageDraw.ImageDraw, width: int, height: int, classification: str) -> None:
+    font = ImageFont.truetype(str(FONT), DEFAULT_FONT_SIZE)
 
     classification_upper = classification.upper()
 
@@ -40,14 +40,14 @@ def draw_overlay(draw: ImageDraw.Draw, width: int, height: int, classification: 
     bottom_overlay_height = BAR_HEIGHT
 
     # Draw top overlay
-    draw.rectangle([0, 0, width, top_overlay_height], fill=overlay_color)
+    draw.rectangle([0, 0, width, top_overlay_height], fill=overlay_color)  # type: ignore # noqa: PGH003
 
     # Draw bottom overlay
-    draw.rectangle([0, height - bottom_overlay_height, width, height], fill=overlay_color)
+    draw.rectangle([0, height - bottom_overlay_height, width, height], fill=overlay_color)  # type: ignore # noqa: PGH003
 
-    text = classification_upper if classification_upper in ["SECRET", "CUI"] else classification
+    text = classification_upper if classification_upper in {"SECRET", "CUI"} else classification
 
-    text_bbox = draw.textbbox((0, 0), text, font=font)
+    text_bbox = draw.textbbox((0, 0), text, font=font)  # type: ignore # noqa: PGH003
 
     text_width = text_bbox[2] - text_bbox[0]
     text_height = text_bbox[3] + text_bbox[1]
@@ -58,8 +58,8 @@ def draw_overlay(draw: ImageDraw.Draw, width: int, height: int, classification: 
         height - bottom_overlay_height + (bottom_overlay_height - text_height) // 2,
     )
 
-    draw.text(text_position_top, text, font=font, fill=(0, 0, 0))
-    draw.text(text_position_bottom, text, font=font, fill=(0, 0, 0))
+    draw.text(text_position_top, text, font=font, fill=(0, 0, 0))  # type: ignore # noqa: PGH003
+    draw.text(text_position_bottom, text, font=font, fill=(0, 0, 0))  # type: ignore # noqa: PGH003
 
 
 def save_image_with_overlay(
@@ -92,7 +92,7 @@ def move_to_original_images(original_path: pathlib.Path, file_path: pathlib.Path
 def add_overlay_to_directory(directory_path: pathlib.Path, classification: str) -> None:
     original_path = directory_path.resolve()
     for file_path in directory_path.glob("*"):
-        if file_path.is_file() and file_path.suffix.lower() in [".png", ".jpg", ".jpeg"]:
+        if file_path.is_file() and file_path.suffix.lower() in {".png", ".jpg", ".jpeg", ".bmp"}:
             img = load_image(file_path)
             if img:
                 save_image_with_overlay(img, file_path, classification)
@@ -114,6 +114,12 @@ def create_command_line_interface(directory_path: pathlib.Path, classification: 
 @click.argument("directory_path", type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.argument("classification", type=click.Choice(["CUI", "SECRET"], case_sensitive=False))
 def main(directory_path: pathlib.Path, classification: str) -> None:
+    """
+    This project provides a tool for adding classification labels to images within a specified directory. These labels are applied to both the top and bottom of each image, indicating the classification of the content.
+
+    directory_path = The path to the directory containing the images.
+    classification = The classification type to be applied as an overlay (`CUI` or `SECRET`)
+    """
     create_command_line_interface(directory_path, classification)
 
 
