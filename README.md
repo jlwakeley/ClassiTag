@@ -76,13 +76,13 @@ The project relies on the following Python libraries:
 
 - `logging`: Standard library for logging messages.
 - `click`: A command-line interface creation kit.
-- `PIL`: Python Imaging Library for image processing.
+- `Pillow`: Python Imaging Library (PIL) for image processing.
 
 ## Notes
 
 - The Python version utilized is 3.11.6
 - The classification arguments are not case sensative.
-- Supported image formats: PNG, JPG, JPEG.
+- Supported image formats: PNG, JPG, JPEG, BMP.
 
 ## Contributing
 
