@@ -1,4 +1,4 @@
-# Classitag - Image Classification Labeling
+# ClassiTag - Image Classification Labeling
 
 ## Overview
 
