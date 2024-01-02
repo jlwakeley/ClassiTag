@@ -32,7 +32,7 @@ Make sure you have the following prerequisites installed on your system:
     ```bash
     ./bootstrap.sh
     ```
-This script installs system-level dependencies based on your operating system.
+   This script installs system-level dependencies based on your operating system.
 
 4. Install additional project dependencies:
 
