@@ -52,7 +52,7 @@ The main functionality is exposed through a command-line interface (CLI). The CL
 To add classification overlays to images in a directory, use the following command:
 
 ```bash
-poetry run python classitag.py /path/to/directory CUI
+poetry run python classitag.py /path/to/directory secret
 ```
 
 Replace `/path/to/directory` with the path to the directory containing your images. You can also specify the classification type (`CUI` or `SECRET`).
