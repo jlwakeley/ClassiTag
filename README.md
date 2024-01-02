@@ -44,9 +44,9 @@ Run the bootstrap script to set up additional dependencies:
 
 This script installs system-level dependencies based on your operating system.
 
-## Usage
+# Usage
 
-# Command-line Interface
+## Command-line Interface
 
 The main functionality is exposed through a command-line interface (CLI). The CLI takes two arguments:
 
