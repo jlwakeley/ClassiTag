@@ -1,45 +1,81 @@
-# ClassiTag README
+# Classitag - Image Classification Labeling
 
 ## Overview
 
 This project provides a tool for adding classification labels to images within a specified directory. These labels are applied to both the top and bottom of each image, indicating the classification of the content.
 
-## Bootstrap
+## Prerequisites
 
-To set up the project, run the following bootstrap script:
+Make sure you have the following prerequisites installed on your system:
+
+- Python 3.11
+- Virtualenv (optional but recommended)
+- Dependencies listed in `pyproject.toml` (use `poetry install` to install)
+
+## Environment Setup
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/classitag.git
+   cd classitag
+   ```
+
+2. Create a virtual environment (optional but recommended):
+
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+3. Install project dependencies:
+
+   ```bash
+   poetry install
+   ```
+
+## Bootstrap Script
+
+Run the bootstrap script to set up additional dependencies:
 
 ```bash
-python script/bootstrap
+./bootstrap.sh
 ```
 
-This script ensures that the required dependencies are installed. Make sure you have Python installed on your system.
+This script installs system-level dependencies based on your operating system.
 
 ## Usage
 
-### Command-line Interface
+# Command-line Interface
 
 The main functionality is exposed through a command-line interface (CLI). The CLI takes two arguments:
 
 1. `directory_path`: The path to the directory containing the images.
 2. `classification`: The classification type to be applied as an overlay (`CUI` or `SECRET`).
 
-Example:
+To add classification overlays to images in a directory, use the following command:
 
 ```bash
-python classify.py /path/to/images_directory secret
+poetry run python classitag.py /path/to/directory CUI
 ```
+
+Replace `/path/to/directory` with the path to the directory containing your images. You can also specify the classification type (`CUI` or `SECRET`).
+
 This command results in the labeling as seen below.
 
 ![image](test_images/(SECRET)_Hyperion_SC2_DevRend1.png)
 
-### Functionality
+## Additional Configuration
 
-The script iterates through each file in the specified directory, identifies supported image formats (e.g., PNG, JPG, JPEG), and adds classification overlays. The original images are then moved to a new "original_images" directory within the specified directory.
+- **Font**: The script uses the ARIALBD.TTF font. Make sure this font file is available in the specified path or update the `FONT` variable in `classitag.py` accordingly.
 
-### Configuration
+## Running Tests
 
-The project includes default configurations such as font size, colors for different classifications, and font file path. These configurations can be adjusted within the script for customization.
+To run tests, use the following command:
 
+```bash
+poetry run pytest
+```
 ## Dependencies
 
 The project relies on the following Python libraries:
@@ -54,4 +90,7 @@ The project relies on the following Python libraries:
 - The classification arguments are not case sensative.
 - Supported image formats: PNG, JPG, JPEG.
 
-For more information or assistance, please refer to the documentation or contact the project maintainers.
+## Contributing
+
+Contributions are welcome! If you encounter issues or have suggestions, please open an issue or create a pull request.
+
