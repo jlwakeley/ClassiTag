@@ -28,21 +28,17 @@ Make sure you have the following prerequisites installed on your system:
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    ```
 
-3. Install project dependencies:
+3. Run the bootstrap script to set up dependencies:
+    ```bash
+    ./bootstrap.sh
+    ```
+This script installs system-level dependencies based on your operating system.
+
+4. Install additional project dependencies:
 
    ```bash
    poetry install
    ```
-
-## Bootstrap Script
-
-Run the bootstrap script to set up additional dependencies:
-
-```bash
-./bootstrap.sh
-```
-
-This script installs system-level dependencies based on your operating system.
 
 # Usage
 
@@ -65,9 +61,7 @@ This command results in the labeling as seen below.
 
 ![image](test_images/(SECRET)_Hyperion_SC2_DevRend1.png)
 
-## Additional Configuration
-
-- **Font**: The script uses the ARIALBD.TTF font. Make sure this font file is available in the specified path or update the `FONT` variable in `classitag.py` accordingly.
+# Development
 
 ## Running Tests
 
