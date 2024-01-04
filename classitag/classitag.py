@@ -92,7 +92,7 @@ def save_image_with_overlay(
 
     bordered_img = add_border(new_img, border_thickness)
 
-    new_file_path = image_path.with_stem(f"({classification.upper()})_{image_path.stem}_bordered")
+    new_file_path = image_path.with_stem(f"({classification.upper()})_{image_path.stem}")
     bordered_img.save(new_file_path.with_suffix(".png"))
     logging.info(
         f"Overlay with {border_thickness}-pixel black border added to {new_file_path.with_suffix('.png')}"
