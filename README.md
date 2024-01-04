@@ -44,32 +44,21 @@ Make sure you have the following prerequisites installed on your system:
 
 ## Command-line Interface
 
-The main functionality is exposed through a command-line interface (CLI). The CLI takes two arguments and one option:
+The main functionality is exposed through a command-line interface (CLI). The CLI takes two arguments:
 
 1. `directory_path`: The path to the directory containing the images.
 2. `classification`: The classification type to be applied as an overlay (`CUI` or `SECRET`).
-3. `--outline`: Enables an optional border for documentation contrast.
 
 To add classification overlays to images in a directory, use the following command:
 
 ```bash
 poetry run python classitag.py /path/to/directory secret 
 ```
+Replace `/path/to/directory` with the path to the directory containing your images. You can also specify the classification type (`CUI` or `SECRET`).
 
 This command results in the labeling as seen below.
 
-![image](test_images/(SECRET)_Hyperion_SC2_DevRend1.png)
-
-To add the optional border, use the following command:
-
-```bash
-poetry run python classitag.py /path/to/directory cui --outline
-```
-The applied border can be seen below.
-
-![image](test_images/(CUI)_Hyperion_SC2_DevRend1.png)
-
-Replace `/path/to/directory` with the path to the directory containing your images. You can also specify the classification type (`CUI` or `SECRET`).
+![image](example_images/(SECRET)_Hyperion_SC2_DevRend1.png)
 
 # Development
 
