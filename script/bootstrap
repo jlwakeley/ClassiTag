@@ -13,10 +13,6 @@ elif [ "$os_type" == "Linux" ]; then
     echo "Running on Linux (or WSL)"
     sudo apt-get install libpq-dev build-essential
     command -v pyenv || curl https://pyenv.run | bash
-elif [ "$os_type" == MINGW64* ]; then
-    echo "Running on Windows"
-    # Install pyenv using the default Python installer for Windows
-    command -v pyenv || (curl https://pyenv.run | bash) && echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> $PROFILE
 else
     echo "Unsupported operating system: $os_type"
     exit 1
