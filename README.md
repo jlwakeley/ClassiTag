@@ -30,7 +30,7 @@ Make sure you have the following prerequisites installed on your system:
 
 3. Run the bootstrap script to set up dependencies:
     ```bash
-    ./bootstrap.sh
+    script/bootstrap.sh
     ```
    This script installs system-level dependencies based on your operating system.
 
