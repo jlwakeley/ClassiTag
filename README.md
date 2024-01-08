@@ -86,12 +86,11 @@ The project relies on the following Python libraries:
 - If using pyinstaller to make an executable, you will have to replace the following line:
 ```bash
 FONT = pathlib.Path(__file__).parent / ".." / "font" / "ARIALBD.TTF"
-```
+ ```
 With:
 ```bash
 FONT = pathlib.Path(sys._MEIPASS) / "font" / "ARIALBD.TTF"
 ```
-
 
 ## Contributing
 
