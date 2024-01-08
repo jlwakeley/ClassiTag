@@ -76,12 +76,22 @@ The project relies on the following Python libraries:
 - `logging`: Standard library for logging messages.
 - `click`: A command-line interface creation kit.
 - `Pillow`: Python Imaging Library (PIL) for image processing.
+- `pyinstaller`: For executable creation.
 
 ## Notes
 
 - The Python version utilized is 3.11.6
 - The classification arguments are not case sensative.
 - Supported image formats: PNG, JPG, JPEG, BMP.
+- If using pyinstaller to make an executable, you will have to replace the following line:
+'''python
+FONT = pathlib.Path(__file__).parent / ".." / "font" / "ARIALBD.TTF"
+'''
+With:
+'''python
+FONT = pathlib.Path(sys._MEIPASS) / "font" / "ARIALBD.TTF"
+'''
+
 
 ## Contributing
 

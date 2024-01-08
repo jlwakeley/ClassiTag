@@ -8,13 +8,13 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
-DEFAULT_FONT_SIZE = 12
+DEFAULT_FONT_SIZE = 25
 CLASSIFICATION_COLORS = {
     "SECRET": (255, 0, 0),
     "CUI": (0, 255, 0),
 }
 DEFAULT_CLASSIFICATION_COLOR = (0, 0, 0)
-BAR_HEIGHT = 15
+BAR_HEIGHT = 40
 FONT = pathlib.Path(__file__).parent / ".." / "font" / "ARIALBD.TTF"
 
 
@@ -35,7 +35,7 @@ def draw_overlay(draw: ImageDraw.ImageDraw, width: int, height: int, classificat
 
     overlay_color = CLASSIFICATION_COLORS.get(classification_upper, DEFAULT_CLASSIFICATION_COLOR)
 
-    # Calculate top and bottom overlay heights
+    # Set fixed height for the top and bottom overlay
     top_overlay_height = BAR_HEIGHT
     bottom_overlay_height = BAR_HEIGHT
 
@@ -81,14 +81,17 @@ def save_image_with_overlay(
 ) -> None:
     width, height = img.size
 
-    # Create a new image with additional space above and below
-    new_img = Image.new("RGB", (width, height + 2 * BAR_HEIGHT), (0, 0, 0))  # Black background
+    # Set fixed height for the top and bottom overlay
+    total_height = height + 2 * BAR_HEIGHT
+
+    # Create a new image with additional space for top and bottom overlays
+    new_img = Image.new("RGB", (width, total_height), (0, 0, 0))  # Black background
+
+    draw = ImageDraw.Draw(new_img)
+    draw_overlay(draw, width, total_height, classification)  # type: ignore # noqa: PGH003
 
     # Paste the original image onto the new image
     new_img.paste(img, (0, BAR_HEIGHT))
-
-    draw = ImageDraw.Draw(new_img)
-    draw_overlay(draw, width, height + 2 * BAR_HEIGHT, classification)
 
     bordered_img = add_border(new_img, border_thickness)
 
