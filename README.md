@@ -84,13 +84,13 @@ The project relies on the following Python libraries:
 - The classification arguments are not case sensative.
 - Supported image formats: PNG, JPG, JPEG, BMP.
 - If using pyinstaller to make an executable, you will have to replace the following line:
-'''bash
+```bash
 FONT = pathlib.Path(__file__).parent / ".." / "font" / "ARIALBD.TTF"
-'''
+```
 With:
-'''bash
+```bash
 FONT = pathlib.Path(sys._MEIPASS) / "font" / "ARIALBD.TTF"
-'''
+```
 
 
 ## Contributing
