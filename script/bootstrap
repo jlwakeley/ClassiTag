@@ -4,6 +4,8 @@ VENV=".venv"
 
 os_type=$(uname -s)
 
+os_type=$(uname -s)
+
 if [ "$os_type" == "Darwin" ]; then
     echo "Running on macOS"
     command -v pyenv || brew install pyenv
@@ -11,10 +13,15 @@ elif [ "$os_type" == "Linux" ]; then
     echo "Running on Linux (or WSL)"
     sudo apt-get install libpq-dev build-essential
     command -v pyenv || curl https://pyenv.run | bash
+elif [ "$os_type" == "MINGW64_NT-10.0" ]; then
+    echo "Running on Windows"
+    # Install pyenv using the default Python installer for Windows
+    command -v pyenv || (curl https://pyenv.run | bash) && echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> $PROFILE
 else
     echo "Unsupported operating system: $os_type"
     exit 1
 fi
+
 
 pyenv install --skip-existing
 

@@ -40,7 +40,7 @@ description = "Classification labeling of images"
 authors = ["Jon Wakeley, <Jonathan.L.Wakeley@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11.6,<3.13"
 pillow = "^10.1.0"
 click = "^8.0"
 
@@ -56,3 +56,4 @@ pytest-runner = "*"
 ruff = "*"
 pytest-env = "^1.1.1"
 types-pillow = "^10.1.0.2"
+pyinstaller = "^6.3.0"
