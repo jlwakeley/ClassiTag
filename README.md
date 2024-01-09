@@ -21,7 +21,7 @@ Make sure you have the following prerequisites installed on your system:
    cd classitag
    ```
 
-2. Create a virtual environment (optional but recommended):
+2. Create a virtual environment (Make sure that you set the local version of pyenv to Python 3.11 or higher.):
 
    ```bash
    python -m venv .venv
@@ -30,7 +30,7 @@ Make sure you have the following prerequisites installed on your system:
 
 3. Run the bootstrap script to set up dependencies:
     ```bash
-    script/bootstrap.sh
+    script/bootstrap
     ```
    This script installs system-level dependencies based on your operating system.
 
