@@ -11,7 +11,7 @@ logging.basicConfig(
 DEFAULT_FONT_SIZE = 25
 CLASSIFICATION_COLORS = {
     "SECRET": (255, 0, 0),
-    "CUI": (0, 255, 0),
+    "CUI": (80, 43, 133),
 }
 DEFAULT_CLASSIFICATION_COLOR = (0, 0, 0)
 BAR_HEIGHT = 40
@@ -58,8 +58,8 @@ def draw_overlay(draw: ImageDraw.ImageDraw, width: int, height: int, classificat
         height - bottom_overlay_height + (bottom_overlay_height - text_height) // 2,
     )
 
-    draw.text(text_position_top, text, font=font, fill=(0, 0, 0))  # type: ignore # noqa: PGH003
-    draw.text(text_position_bottom, text, font=font, fill=(0, 0, 0))  # type: ignore # noqa: PGH003
+    draw.text(text_position_top, text, font=font, fill=(255, 255, 255))  # type: ignore # noqa: PGH003
+    draw.text(text_position_bottom, text, font=font, fill=(255, 255, 255))  # type: ignore # noqa: PGH003
 
 
 def add_border(img: Image.Image, border_thickness: int) -> Image.Image:

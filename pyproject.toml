@@ -43,6 +43,8 @@ authors = ["Jon Wakeley, <Jonathan.L.Wakeley@gmail.com>"]
 python = ">=3.11.6,<3.13"
 pillow = "^10.1.0"
 click = "^8.0"
+python-docx = "^1.1.0"
+python-pptx = "^0.6.23"
 
 [tool.poetry.group.dev.dependencies]
 coverage = "*"
@@ -55,5 +57,5 @@ pytest-mock = "*"
 pytest-runner = "*"
 ruff = "*"
 pytest-env = "^1.1.1"
-types-pillow = "^10.1.0.2"
+types-pillow = "^10.1.0"
 pyinstaller = "^6.3.0"
