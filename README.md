@@ -49,7 +49,7 @@ Make sure you have the following prerequisites installed on your system:
 
    ```bash
    python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   source .venv/bin/activate
    ```
 
 3. Run the bootstrap script to set up dependencies:
