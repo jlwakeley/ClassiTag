@@ -8,11 +8,12 @@ This project provides a tool for adding classification labels to images within a
 
 Make sure you have the following prerequisites installed on your system:
 
-- Python 3.11
+- Python 3.11 or higher
 - Virtualenv (optional but recommended)
-- Dependencies listed in `pyproject.toml` (use `poetry install` to install)
 
 ## Environment Setup
+
+### For Manual setup or Windows use
 
 1. Clone the repository:
 
@@ -25,7 +26,30 @@ Make sure you have the following prerequisites installed on your system:
 
    ```bash
    python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   .venv\Scripts\activate
+   ```
+3. Install dependencies:
+
+   ```bash
+   pip install pillow
+   pip install types-pillow
+   pip install click
+   ```
+
+### For automatic set up on Linux or MacOS
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/classitag.git
+   cd classitag
+   ```
+
+2. Create a virtual environment (Make sure that you set the local version of pyenv to Python 3.11 or higher.):
+
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate
    ```
 
 3. Run the bootstrap script to set up dependencies:
@@ -52,13 +76,13 @@ The main functionality is exposed through a command-line interface (CLI). The CL
 To add classification overlays to images in a directory, use the following command:
 
 ```bash
-python classtag/classitag.py /path/to/directory secret 
+python classtag/classitag.py /path/to/directory *classification type* 
 ```
 Replace `/path/to/directory` with the path to the directory containing your images. You can also specify the classification type (`CUI` or `SECRET`).
 
-This command results in the labeling as seen below.
+Labeling output as seen below.
 
-![image](example_images/(SECRET)_Hyperion_SC2_DevRend1.png)
+![image](example_images/(SECRET)_Hyperion_SC2_DevRend1.png) ![image](example_images/(CUI)_Hyperion_SC2_DevRend1.png)
 
 # Development
 
@@ -76,7 +100,7 @@ The project relies on the following Python libraries:
 - `logging`: Standard library for logging messages.
 - `click`: A command-line interface creation kit.
 - `Pillow`: Python Imaging Library (PIL) for image processing.
-- `pyinstaller`: For executable creation.
+- `pyinstaller`: For executable creation if use requires evironment where python or dependency installation is unavailable.
 
 ## Notes
 
