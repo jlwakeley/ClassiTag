@@ -32,7 +32,6 @@ Make sure you have the following prerequisites installed on your system:
 
    ```bash
    pip install pillow
-   pip install types-pillow
    pip install click
    ```
 
