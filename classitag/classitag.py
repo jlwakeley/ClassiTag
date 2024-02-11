@@ -123,29 +123,58 @@ def create_gui() -> None:
 
     def start_labeling() -> None:
         directory_path = dir_entry.get()
-        classification_type = class_entry.get()
+        classification_type = classification_var.get()
         create_command_line_interface(directory_path, classification_type)
 
     root = tk.Tk()
     root.title("ClassiTag")
+    root.configure(bg="#f2f2f2")
 
-    dir_label = tk.Label(root, text="Select Image Directory:")
-    dir_label.pack()
+    header_font = ("Helvetica", 16, "bold")
+    button_font = ("Helvetica", 10, "bold")
 
-    dir_entry = tk.Entry(root, width=50)
-    dir_entry.pack()
+    dir_label = tk.Label(
+        root, text="Select Image Directory:", font=header_font, padx=10, pady=5, bg="#f2f2f2"
+    )
+    dir_label.grid(row=0, column=0, columnspan=2, sticky="ew")
 
-    browse_button = tk.Button(root, text="Browse", command=browse_directory)
-    browse_button.pack()
+    dir_entry = tk.Entry(root, width=30)
+    dir_entry.grid(row=1, column=0, pady=5, padx=10, sticky="ew")
 
-    class_label = tk.Label(root, text="Select Classification Type:")
-    class_label.pack()
+    browse_button = tk.Button(root, text="Browse", command=browse_directory, padx=10)
+    browse_button.grid(row=1, column=1, pady=5, padx=10, sticky="ew")
 
-    class_entry = tk.Entry(root, width=20)
-    class_entry.pack()
+    class_label = tk.Label(
+        root, text="Select Classification Type:", font=header_font, padx=10, pady=5, bg="#f2f2f2"
+    )
+    class_label.grid(row=2, column=0, columnspan=2, sticky="ew")
 
-    label_button = tk.Button(root, text="Start Labeling", command=start_labeling)
-    label_button.pack()
+    classification_options = ["CUI", "SECRET"]
+    classification_var = tk.StringVar(root)
+    classification_var.set(classification_options[0])
+
+    for i, option in enumerate(classification_options):
+        rb = tk.Radiobutton(
+            root, text=option, variable=classification_var, value=option, bg="#f2f2f2", padx=10
+        )
+        rb.grid(row=3 + i, column=0, columnspan=2, sticky="w", padx=10, pady=2)
+
+    label_button = tk.Button(
+        root,
+        text="Start Labeling",
+        command=start_labeling,
+        bg="#004953",
+        fg="white",
+        width=20,
+        height=2,
+        font=button_font,
+    )
+    label_button.grid(row=6, column=0, columnspan=2, pady=10, padx=10, sticky="ew")
+
+    root.grid_rowconfigure(0, minsize=20)
+    root.grid_rowconfigure(7, minsize=20)
+    root.grid_columnconfigure(0, minsize=20)
+    root.grid_columnconfigure(1, minsize=20)
 
     root.mainloop()
 
