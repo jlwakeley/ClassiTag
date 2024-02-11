@@ -1,5 +1,7 @@
 import logging
 import pathlib
+import tkinter as tk
+from tkinter import filedialog
 
 import click
 from PIL import Image, ImageDraw, ImageFont
@@ -35,20 +37,15 @@ def draw_overlay(draw: ImageDraw.ImageDraw, width: int, height: int, classificat
 
     overlay_color = CLASSIFICATION_COLORS.get(classification_upper, DEFAULT_CLASSIFICATION_COLOR)
 
-    # Set fixed height for the top and bottom overlay
     top_overlay_height = BAR_HEIGHT
     bottom_overlay_height = BAR_HEIGHT
 
-    # Draw top overlay
-    draw.rectangle([0, 0, width, top_overlay_height], fill=overlay_color)  # type: ignore # noqa: PGH003
-
-    # Draw bottom overlay
-    draw.rectangle([0, height - bottom_overlay_height, width, height], fill=overlay_color)  # type: ignore # noqa: PGH003
+    draw.rectangle([0, 0, width, top_overlay_height], fill=overlay_color)
+    draw.rectangle([0, height - bottom_overlay_height, width, height], fill=overlay_color)
 
     text = classification_upper if classification_upper in {"SECRET", "CUI"} else classification
 
-    text_bbox = draw.textbbox((0, 0), text, font=font)  # type: ignore # noqa: PGH003
-
+    text_bbox = draw.textbbox((0, 0), text, font=font)
     text_width = text_bbox[2] - text_bbox[0]
     text_height = text_bbox[3] + text_bbox[1]
 
@@ -58,14 +55,13 @@ def draw_overlay(draw: ImageDraw.ImageDraw, width: int, height: int, classificat
         height - bottom_overlay_height + (bottom_overlay_height - text_height) // 2,
     )
 
-    draw.text(text_position_top, text, font=font, fill=(255, 255, 255))  # type: ignore # noqa: PGH003
-    draw.text(text_position_bottom, text, font=font, fill=(255, 255, 255))  # type: ignore # noqa: PGH003
+    draw.text(text_position_top, text, font=font, fill=(255, 255, 255))
+    draw.text(text_position_bottom, text, font=font, fill=(255, 255, 255))
 
 
 def add_border(img: Image.Image, border_thickness: int) -> Image.Image:
     width, height = img.size
 
-    # Create a new image black border
     bordered_img = Image.new(
         "RGB",
         (width + 2 * border_thickness, height + 2 * border_thickness),
@@ -81,16 +77,13 @@ def save_image_with_overlay(
 ) -> None:
     width, height = img.size
 
-    # Set fixed height for the top and bottom overlay
     total_height = height + 2 * BAR_HEIGHT
 
-    # Create a new image with additional space for top and bottom overlays
-    new_img = Image.new("RGB", (width, total_height), (0, 0, 0))  # Black background
+    new_img = Image.new("RGB", (width, total_height), (0, 0, 0))
 
     draw = ImageDraw.Draw(new_img)
-    draw_overlay(draw, width, total_height, classification)  # type: ignore # noqa: PGH003
+    draw_overlay(draw, width, total_height, classification)
 
-    # Paste the original image onto the new image
     new_img.paste(img, (0, BAR_HEIGHT))
 
     bordered_img = add_border(new_img, border_thickness)
@@ -122,6 +115,41 @@ def add_overlay_to_directory(directory_path: pathlib.Path, classification: str) 
             logging.warning(f"Skipping unsupported file: {file_path}")
 
 
+def create_gui() -> None:
+    def browse_directory() -> None:
+        directory_path = filedialog.askdirectory()
+        dir_entry.delete(0, tk.END)
+        dir_entry.insert(0, directory_path)
+
+    def start_labeling() -> None:
+        directory_path = dir_entry.get()
+        classification_type = class_entry.get()
+        create_command_line_interface(directory_path, classification_type)
+
+    root = tk.Tk()
+    root.title("ClassiTag")
+
+    dir_label = tk.Label(root, text="Select Image Directory:")
+    dir_label.pack()
+
+    dir_entry = tk.Entry(root, width=50)
+    dir_entry.pack()
+
+    browse_button = tk.Button(root, text="Browse", command=browse_directory)
+    browse_button.pack()
+
+    class_label = tk.Label(root, text="Select Classification Type:")
+    class_label.pack()
+
+    class_entry = tk.Entry(root, width=20)
+    class_entry.pack()
+
+    label_button = tk.Button(root, text="Start Labeling", command=start_labeling)
+    label_button.pack()
+
+    root.mainloop()
+
+
 def create_command_line_interface(directory_path: pathlib.Path, classification: str) -> None:
     directory_path = pathlib.Path(directory_path)
     if not directory_path.exists() or not directory_path.is_dir():
@@ -145,4 +173,4 @@ def main(directory_path: pathlib.Path, classification: str) -> None:
 
 
 if __name__ == "__main__":
-    main()
+    create_gui()
