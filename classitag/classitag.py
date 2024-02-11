@@ -12,10 +12,11 @@ logging.basicConfig(
 
 DEFAULT_FONT_SIZE = 25
 CLASSIFICATION_COLORS = {
-    "SECRET": (255, 0, 0),
+    "SECRET": (200, 16, 46),
     "CUI": (80, 43, 133),
+    "UNCLASSIFIED": (0, 122, 51),
 }
-DEFAULT_CLASSIFICATION_COLOR = (0, 0, 0)
+DEFAULT_CLASSIFICATION_COLOR = (0, 122, 51)
 BAR_HEIGHT = 40
 FONT = pathlib.Path(__file__).parent / ".." / "font" / "ARIALBD.TTF"
 
@@ -43,7 +44,11 @@ def draw_overlay(draw: ImageDraw.ImageDraw, width: int, height: int, classificat
     draw.rectangle([0, 0, width, top_overlay_height], fill=overlay_color)
     draw.rectangle([0, height - bottom_overlay_height, width, height], fill=overlay_color)
 
-    text = classification_upper if classification_upper in {"SECRET", "CUI"} else classification
+    text = (
+        classification_upper
+        if classification_upper in {"SECRET", "CUI", "UNCLASSIFIED"}
+        else classification
+    )
 
     text_bbox = draw.textbbox((0, 0), text, font=font)
     text_width = text_bbox[2] - text_bbox[0]
@@ -88,7 +93,7 @@ def save_image_with_overlay(
 
     bordered_img = add_border(new_img, border_thickness)
 
-    new_file_path = image_path.with_stem(f"({classification.upper()})_{image_path.stem}")
+    new_file_path = image_path.with_stem(f"({classification.upper()[0]}) {image_path.stem}")
     bordered_img.save(new_file_path.with_suffix(".png"))
     logging.info(
         f"Overlay with {border_thickness}-pixel black border added to {new_file_path.with_suffix('.png')}"
@@ -149,7 +154,7 @@ def create_gui() -> None:
     )
     class_label.grid(row=2, column=0, columnspan=2, sticky="ew")
 
-    classification_options = ["CUI", "SECRET"]
+    classification_options = ["UNCLASSIFIED", "CUI", "SECRET"]
     classification_var = tk.StringVar(root)
     classification_var.set(classification_options[0])
 
@@ -189,17 +194,28 @@ def create_command_line_interface(directory_path: pathlib.Path, classification: 
 
 
 @click.command()
-@click.argument("directory_path", type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.argument("classification", type=click.Choice(["CUI", "SECRET"], case_sensitive=False))
+@click.argument(
+    "directory_path", type=click.Path(exists=True, file_okay=False, dir_okay=True), required=False
+)
+@click.argument(
+    "classification",
+    type=click.Choice(["CUI", "SECRET", "UNCLASS"], case_sensitive=False),
+    required=False,
+)
 def main(directory_path: pathlib.Path, classification: str) -> None:
     """
     This project provides a tool for adding classification labels to images within a specified directory. These labels are applied to both the top and bottom of each image, indicating the classification of the content.
 
-    directory_path = The path to the directory containing the images.
-    classification = The classification type to be applied as an overlay (`CUI` or `SECRET`)
+    directory_path = The path to the directory containing the images. Optional when using GUI mode.
+    classification = The classification type to be applied as an overlay ("CUI", "SECRET" or "UNCLASS"). Optional when using GUI mode.
     """
-    create_command_line_interface(directory_path, classification)
+    if directory_path is None:
+        create_gui()
+    elif classification:
+        create_command_line_interface(directory_path, classification)
+    else:
+        logging.error("Classification type is missing. Exiting.")
 
 
 if __name__ == "__main__":
-    create_gui()
+    main()
