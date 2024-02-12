@@ -2,13 +2,43 @@
 
 ## Overview
 
-This project provides a tool for adding classification labels to images within a specified directory. These labels are applied to both the top and bottom of each image, indicating the classification of the content.
+This project provides a tool for adding classification labels to a large amoount of images within a specified directory on Windows, Linux or Mac systems. See example images below. 
 
 ## Prerequisites
 
 Make sure you have the following prerequisites installed on your system:
 
 - Python 3.11 or higher
+
+## Usage  
+The tool offers both an easy-to-use graphical user interface (GUI) or a classic command line experience.  
+- For the GUI: Download the latest release for the executable. Click the exe file to launch the GUI.
+
+![image](example_images/gui.png)
+
+- for the CLI: Use `classittag.py` which takes two arguements.   
+1. `directory_path`: The path to the directory containing the images.
+2. `classification`: The classification type to be applied as an overlay (`UNCLASSIFIED`, `CUI`, or `SECRET`).
+
+Example:  
+```
+python classtag/classitag.py /path/to/directory/ cui
+```
+
+The labeled images will be saved within the same directory and the original will be saved in a newly created folder called, `original_images`.  
+
+
+## Sample output:
+
+![image](example_images/(U)Hyperion_SC2_DevRend1.png)
+
+![image](example_images/(C)Hyperion_SC2_DevRend1.png) 
+
+![image](example_images/(S)Hyperion_SC2_DevRend1.png) 
+
+# Development stuff
+
+Requirements:   
 - Virtualenv (optional but recommended)
 
 ## Environment Setup
@@ -65,51 +95,6 @@ Make sure you have the following prerequisites installed on your system:
    poetry install
    ```
 
-# Usage
-
-## Command-line Interface (CLI)
-
-The main functionality is exposed through a command-line interface (CLI). The CLI takes two arguments:
-
-1. `directory_path`: The path to the directory containing the images.
-2. `classification`: The classification type to be applied as an overlay (`UNCLASSIFIED`, `CUI`, or `SECRET`).
-
-Note: If you use CLU arguments, the GUI will not appear.
-
-To add classification overlays to images in a directory, use the following command:
-
-```bash
-python classtag/classitag.py /path/to/directory *classification type* 
-```
-Replace `/path/to/directory` with the path to the directory containing your images. You can also specify the classification type (`UNCLASSIFIED`, `CUI`, or `SECRET`).
-
-The labeled images will be saved within the same directory and the original will be saved in a newly created folder called, `original_images`.
-
-Labeling output as seen below.
-
-![image](example_images/(U)Hyperion_SC2_DevRend1.png)
-
-![image](example_images/(C)Hyperion_SC2_DevRend1.png) 
-
-![image](example_images/(S)Hyperion_SC2_DevRend1.png) 
-
-
-## Graphical User Interface (GUI)
-
-The GUI has the exact same functionalities as the CLI. If you just run `classitag.py`, without any CLI arguments, the GUI will appear. 
-
-Push `Browse` to select the directory where the images that you want to classify are located. 
-
-Select the desired classification from the radio buttons and push `Start Labeling` when you are ready.
-
-The labeled images will be saved within the same directory and the original will be saved in a newly created folder called, `original_images`.
-
-This is a preview of the GUI.
-
-![image](example_images/gui.png)
-
-
-# Development
 
 ## Running Tests (Coming Soon)
 
