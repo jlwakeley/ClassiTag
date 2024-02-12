@@ -41,7 +41,7 @@ authors = ["Jon Wakeley, <Jonathan.L.Wakeley@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.11.6,<3.13"
-pillow = "^10.1.0"
+pillow = "^10.2.0"
 click = "^8.0"
 tk = "^0.1.0"
 
