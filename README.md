@@ -74,6 +74,8 @@ The main functionality is exposed through a command-line interface (CLI). The CL
 1. `directory_path`: The path to the directory containing the images.
 2. `classification`: The classification type to be applied as an overlay (`UNCLASSIFIED`, `CUI`, or `SECRET`).
 
+Note: If you use CLU arguments, the GUI will not appear.
+
 To add classification overlays to images in a directory, use the following command:
 
 ```bash
@@ -94,7 +96,9 @@ Labeling output as seen below.
 
 ## Graphical User Interface (GUI)
 
-The GUI has the exact same functionalities as the CLI. Push `Browse` to select the directory where the images that you want to classify are located. 
+The GUI has the exact same functionalities as the CLI. If you just run `classitag.py`, without any CLI arguments, the GUI will appear. 
+
+Push `Browse` to select the directory where the images that you want to classify are located. 
 
 Select the desired classification from the radio buttons and push `Start Labeling` when you are ready.
 
