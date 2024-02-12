@@ -18,7 +18,7 @@ Make sure you have the following prerequisites installed on your system:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/classitag.git
+   git clone https://github.com/yourusername/ClassiTag.git
    cd classitag
    ```
 
@@ -32,7 +32,9 @@ Make sure you have the following prerequisites installed on your system:
 
    ```bash
    pip install pillow
+   pip install types-pillow
    pip install click
+   pip install tk
    ```
 
 ### For automatic set up on Linux or MacOS
@@ -40,7 +42,7 @@ Make sure you have the following prerequisites installed on your system:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/classitag.git
+   git clone https://github.com/yourusername/ClassiTag.git
    cd classitag
    ```
 
@@ -65,23 +67,38 @@ Make sure you have the following prerequisites installed on your system:
 
 # Usage
 
-## Command-line Interface
+## Command-line Interface (CLI)
 
 The main functionality is exposed through a command-line interface (CLI). The CLI takes two arguments:
 
 1. `directory_path`: The path to the directory containing the images.
-2. `classification`: The classification type to be applied as an overlay (`CUI` or `SECRET`).
+2. `classification`: The classification type to be applied as an overlay (`UNCLASSIFIED`, `CUI`, or `SECRET`).
 
 To add classification overlays to images in a directory, use the following command:
 
 ```bash
 python classtag/classitag.py /path/to/directory *classification type* 
 ```
-Replace `/path/to/directory` with the path to the directory containing your images. You can also specify the classification type (`CUI` or `SECRET`).
+Replace `/path/to/directory` with the path to the directory containing your images. You can also specify the classification type (`UNCLASSIFIED`, `CUI`, or `SECRET`).
+
+The labeled images will be saved within the same directory and the original will be saved in a newly created folder called, `original_images`.
 
 Labeling output as seen below.
 
-![image](example_images/(SECRET)_Hyperion_SC2_DevRend1.png) ![image](example_images/(CUI)_Hyperion_SC2_DevRend1.png)
+![image](example_images/(S) Hyperion_SC2_DevRend1.png) ![image](example_images/(C) Hyperion_SC2_DevRend1.png) ![image](example_images/(U) Hyperion_SC2_DevRend1.png)
+
+## Graphical User Interface (GUI)
+
+The GUI has the exact same functionalities as the CLI. Push `Browse` to select the directory where the images that you want to classify are located. 
+
+Select the desired classification from the radio buttons and push `Start Labeling` when you are ready.
+
+The labeled images will be saved within the same directory and the original will be saved in a newly created folder called, `original_images`.
+
+This is a preview of the GUI.
+
+![image](example_images/gui.png)
+
 
 # Development
 
@@ -99,6 +116,7 @@ The project relies on the following Python libraries:
 - `logging`: Standard library for logging messages.
 - `click`: A command-line interface creation kit.
 - `Pillow`: Python Imaging Library (PIL) for image processing.
+- `tkinter`: Library for creating the GUI.
 - `pyinstaller`: For executable creation if use requires evironment where python or dependency installation is unavailable.
 
 ## Notes
