@@ -196,7 +196,7 @@ def create_command_line_interface(directory_path: pathlib.Path, classification: 
 )
 @click.argument(
     "classification",
-    type=click.Choice(["CUI", "SECRET", "UNCLASS"], case_sensitive=False),
+    type=click.Choice(["CUI", "SECRET", "UNCLASSIFIED"], case_sensitive=False),
     required=False,
 )
 def main(directory_path: pathlib.Path, classification: str) -> None:
@@ -204,7 +204,7 @@ def main(directory_path: pathlib.Path, classification: str) -> None:
     This project provides a tool for adding classification labels to images within a specified directory. These labels are applied to both the top and bottom of each image, indicating the classification of the content.
 
     directory_path = The path to the directory containing the images. Optional when using GUI mode.
-    classification = The classification type to be applied as an overlay ("CUI", "SECRET" or "UNCLASS"). Optional when using GUI mode.
+    classification = The classification type to be applied as an overlay ("CUI", "SECRET" or "UNCLASSIFIED"). Optional when using GUI mode.
     """
     if directory_path is None:
         create_gui()
