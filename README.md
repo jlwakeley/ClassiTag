@@ -85,7 +85,6 @@ The labeled images will be saved within the same directory and the original will
 
 Labeling output as seen below.
 
-![image](example_images/(U)Hyperion_SC2_DevRend1.png)
 
 ![image](example_images/(C)Hyperion_SC2_DevRend1.png) 
 
