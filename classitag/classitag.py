@@ -41,8 +41,8 @@ def draw_overlay(draw: ImageDraw.ImageDraw, width: int, height: int, classificat
     top_overlay_height = BAR_HEIGHT
     bottom_overlay_height = BAR_HEIGHT
 
-    draw.rectangle([0, 0, width, top_overlay_height], fill=overlay_color)
-    draw.rectangle([0, height - bottom_overlay_height, width, height], fill=overlay_color)
+    draw.rectangle([0, 0, width, top_overlay_height], fill=overlay_color)  # type: ignore # noqa: PGH003
+    draw.rectangle([0, height - bottom_overlay_height, width, height], fill=overlay_color)  # type: ignore # noqa: PGH003
 
     text = (
         classification_upper
@@ -95,9 +95,6 @@ def save_image_with_overlay(
 
     new_file_path = image_path.with_stem(f"({classification.upper()[0]}) {image_path.stem}")
     bordered_img.save(new_file_path.with_suffix(".png"))
-    logging.info(
-        f"Overlay with {border_thickness}-pixel black border added to {new_file_path.with_suffix('.png')}"
-    )
 
 
 def move_to_original_images(original_path: pathlib.Path, file_path: pathlib.Path) -> None:
@@ -129,7 +126,7 @@ def create_gui() -> None:
     def start_labeling() -> None:
         directory_path = dir_entry.get()
         classification_type = classification_var.get()
-        create_command_line_interface(directory_path, classification_type)
+        create_command_line_interface(directory_path, classification_type)  # type: ignore # noqa: PGH003
 
     root = tk.Tk()
     root.title("ClassiTag")
