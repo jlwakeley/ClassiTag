@@ -9,37 +9,8 @@ This project provides a tool for adding classification labels to a large amoount
 Make sure you have the following prerequisites installed on your system:
 
 - Python 3.11 or higher
-
-## Usage  
-The tool offers both an easy-to-use graphical user interface (GUI) or a classic command line experience.  
-- For the GUI: Download the latest release for the executable. Click the exe file to launch the GUI.
-
-![image](example_images/gui.png)
-
-- for the CLI: Use `classittag.py` which takes two arguements.   
-1. `directory_path`: The path to the directory containing the images.
-2. `classification`: The classification type to be applied as an overlay (`UNCLASSIFIED`, `CUI`, or `SECRET`).
-
-Example:  
-```
-python classtag/classitag.py /path/to/directory/ cui
-```
-
-The labeled images will be saved within the same directory and the original will be saved in a newly created folder called, `original_images`.  
-
-
-## Sample output:
-
-![image](example_images/(U)Hyperion_SC2_DevRend1.png)
-
-![image](example_images/(C)Hyperion_SC2_DevRend1.png) 
-
-![image](example_images/(S)Hyperion_SC2_DevRend1.png) 
-
-# Development stuff
-
-Requirements:   
 - Virtualenv (optional but recommended)
+- Dependencies (see below)
 
 ## Environment Setup
 
@@ -94,7 +65,34 @@ Requirements:
    ```bash
    poetry install
    ```
+## Usage  
+The tool offers both an easy-to-use graphical user interface (GUI) or a classic command line experience.  
+- For the GUI: Download the latest release for the executable. Click the exe file to launch the GUI.
 
+![image](example_images/gui.png)
+
+- for the CLI: Use `classittag.py` which takes two arguements.   
+1. `directory_path`: The path to the directory containing the images.
+2. `classification`: The classification type to be applied as an overlay (`UNCLASSIFIED`, `CUI`, or `SECRET`).
+
+Example:  
+```
+python classtag/classitag.py /path/to/directory/ cui
+```
+
+The labeled images will be saved within the same directory and the original will be saved in a newly created folder called, `original_images`.  
+
+
+## Sample output:
+
+![image](example_images/(U)Hyperion_SC2_DevRend1.png)
+
+![image](example_images/(C)Hyperion_SC2_DevRend1.png) 
+
+![image](example_images/(S)Hyperion_SC2_DevRend1.png) 
+
+
+# Development stuff
 
 ## Running Tests (Coming Soon)
 
