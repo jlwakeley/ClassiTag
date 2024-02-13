@@ -31,7 +31,7 @@ Make sure you have the following prerequisites installed on your system:
    pip install tk
    ```
 
-### bootstrap setup on Linux or MacOS
+### Bootstrap setup on Linux or MacOS
 
 1. Clone the repository:
 
