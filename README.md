@@ -20,7 +20,7 @@ Make sure you have the following prerequisites installed on your system:
 
    ```bash
    git clone https://github.com/yourusername/ClassiTag.git
-   cd classitag
+   cd ClassiTag
    ```
 
 2. Create a virtual environment (Make sure that you set the local version of pyenv to Python 3.11 or higher.):
