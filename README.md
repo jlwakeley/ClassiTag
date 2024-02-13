@@ -34,7 +34,7 @@ The labeled images will be saved within the same directory, and the original wil
 
 ## Sample output:
 
-<img src="example_images/(U)Hyperion_SC2_DevRend1.png" width="225"> <img src="example_images/(C)Hyperion_SC2_DevRend1.png" width="225"> <img src="example_images/(S)Hyperion_SC2_DevRend1.png" width="225">
+<img src="example_images/(U)Hyperion_SC2_DevRend1.png" width="260"> <img src="example_images/(C)Hyperion_SC2_DevRend1.png" width="260"> <img src="example_images/(S)Hyperion_SC2_DevRend1.png" width="260">
 
 ## Installation
 
