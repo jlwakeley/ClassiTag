@@ -67,11 +67,14 @@ Make sure you have the following prerequisites installed on your system:
    ```
 ## Usage  
 The tool offers both an easy-to-use graphical user interface (GUI) or a classic command line experience.  
-- For the GUI: Download the latest release for the executable. Click the exe file to launch the GUI.
+### GUI
+- Windows Executable: Download the latest release and run it to launch the GUI.
+- Repository: If you run classitag.py without any CLI arguments it will also open the GUI.
 
 ![image](example_images/gui.png)
 
-- for the CLI: Use `classittag.py` which takes two arguements.   
+### CLI
+`classittag.py` takes two arguements.   
 1. `directory_path`: The path to the directory containing the images.
 2. `classification`: The classification type to be applied as an overlay (`UNCLASSIFIED`, `CUI`, or `SECRET`).
 
@@ -92,7 +95,7 @@ The labeled images will be saved within the same directory and the original will
 ![image](example_images/(S)Hyperion_SC2_DevRend1.png) 
 
 
-# Development stuff
+# Development
 
 ## Running Tests (Coming Soon)
 
