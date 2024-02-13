@@ -13,7 +13,7 @@ Make sure you have the following prerequisites installed on your system:
 
 ## Environment Setup
 
-### For Manual setup
+### Manual setup
 
 1. Clone the repository:
 
