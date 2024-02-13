@@ -40,7 +40,7 @@ Make sure you have the following prerequisites installed on your system:
    cd classitag
    ```
 
-2. *OPTIONAL BUT RECOMMENDED* Create a virtual environment (Make sure that you set the local version of pyenv to Python 3.11 or higher.):
+2. Create a virtual environment (Make sure that you set the local version of pyenv to Python 3.11 or higher.):
 
    ```bash
    python -m venv .venv
